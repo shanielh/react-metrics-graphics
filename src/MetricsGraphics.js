@@ -33,10 +33,13 @@ export default class MetricsGraphics extends React.Component {
 		if(this.mgData.target&&!nextProps.xax_format){
 			delete this.mgData.xax_format;
 		}
-
 	}
 	componentDidUpdate(){
 		if(this.mgData.target){
+			const node = this.mgData.target;
+			while (node.hasChildNodes()) {
+    		node.removeChild(node.lastChild);
+			}
 			MG.data_graphic(this.mgData);
 		}
 	}
@@ -45,7 +48,7 @@ export default class MetricsGraphics extends React.Component {
 		return(
 			<div className="metricsGraphicsCon" ref={ (c) =>{ if(c!=null) _this.mgData.target=c; } }></div>
 		);
-		
+
 	}
 }
 
